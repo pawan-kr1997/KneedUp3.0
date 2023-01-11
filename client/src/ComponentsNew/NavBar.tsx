@@ -11,7 +11,7 @@ const NavBar: React.FC<NavBarProps> = ({ variant }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     return (
-        <MuiAppBar position="static">
+        <MuiAppBar position="fixed">
             {variant === "primary" ? (
                 <>
                     <PrimaryToolBar onIsDrawerOpen={setIsDrawerOpen} />
