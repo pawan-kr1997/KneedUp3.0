@@ -9,8 +9,12 @@ export type ChildrenProps = {
 };
 
 export type NavListItemProps = ChildrenProps & {
-    to: string;
+    to?: string;
     icon?: JSX.Element;
+    size?: string;
+    color?: string;
+    hoverColor?: string;
+    weight?: string;
 };
 
 export type NavAccordionProps = ChildrenProps & {
@@ -54,4 +58,13 @@ export type DrawerProps = {
 
 export type PrimaryToolbarProps = {
     onIsDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type FeatureIconProps = {
+    icon: JSX.Element;
+    title: string;
+};
+
+export type ListContainerProps = ChildrenProps & {
+    heading: string;
 };

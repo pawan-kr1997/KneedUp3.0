@@ -48,33 +48,33 @@ const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
                 {list.news && (
                     <Accordion category="News on air" icon={<NewspaperIcon />}>
                         <List>
-                            <ListItem to="/national">National</ListItem>
-                            <ListItem to="/international">International</ListItem>
-                            <ListItem to="/sports">Sports</ListItem>
-                            <ListItem to="/business">Business</ListItem>
+                            <ListItem to="/newsOnAir_National"> National</ListItem>
+                            <ListItem to="/newsOnAir_International"> International</ListItem>
+                            <ListItem to="/newsOnAir_Business">Business</ListItem>
+                            <ListItem to="/newsOnAir_Sports">Sports</ListItem>
                         </List>
                     </Accordion>
                 )}
                 {list.president && (
                     <Accordion category="President of India" icon={<CampaignIcon />}>
                         <List>
-                            <ListItem to="/speeches">Speeches</ListItem>
-                            <ListItem to="/pressRelease">Press release</ListItem>
+                            <ListItem to="/poi_Speeches">Speeches</ListItem>
+                            <ListItem to="/poi_pressReleases">Press release</ListItem>
                         </List>
                     </Accordion>
                 )}
                 {list.pib && (
                     <Accordion category="Press information bureau" icon={<AssessmentIcon />}>
                         <List>
-                            <ListItem to="/pressRelease">Press release</ListItem>
+                            <ListItem to="/pib_pressReleases">Press release</ListItem>
                         </List>
                     </Accordion>
                 )}
                 {list.prs && (
                     <Accordion category="PRS India" icon={<InboxIcon />}>
                         <List>
-                            <ListItem to="/blogs">Blogs</ListItem>
-                            <ListItem to="/articles">Articles</ListItem>
+                            <ListItem to="/prs_Blogs">Blogs</ListItem>
+                            <ListItem to="/prs_Articles">Articles</ListItem>
                         </List>
                     </Accordion>
                 )}

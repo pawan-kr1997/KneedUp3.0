@@ -1,4 +1,4 @@
-import { Toolbar, IconButton, styled, ListItemIcon as MuiListItemIcon, Box, Button, Typography, Link } from "@mui/material";
+import { Toolbar, IconButton, styled, ListItem as MuiListItem, ListItemIcon as MuiListItemIcon, Box, Button, Typography, Link, hslToRgb } from "@mui/material";
 
 export const PrimaryToolbar = styled(Toolbar)(({ theme }) => ({
     display: "flex",
@@ -65,21 +65,23 @@ export const ListItemIcon = styled(MuiListItemIcon)({
 
 export const ContentSection = styled(Box)({
     display: "flex",
-    gap: "1rem",
-    border: "1px solid black",
+    gap: "1.5rem",
+    // border: "1px solid black",
     justifyContent: "center",
-    marginTop: "5.5rem",
+    marginTop: "4.1rem",
 });
 
 export const SidebarContainer = styled(Box)(({ theme }) => ({
     width: "3.1rem",
     height: "30rem",
-    backgroundColor: "cyan",
-    border: "1px solid black",
+    // backgroundColor: "cyan",
+    // border: "1px solid black",
     display: "none",
-    // marginTop: "2rem",
     position: "sticky",
     top: "5.5rem",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "3.7rem",
     [theme.breakpoints.up("lg")]: {
         display: "flex",
     },
@@ -87,23 +89,42 @@ export const SidebarContainer = styled(Box)(({ theme }) => ({
 
 export const FeedsContainer = styled(Box)(({ theme }) => ({
     width: "min(50rem, 100vw)",
-    height: "80rem",
-    backgroundColor: "lightskyblue",
-    border: "1px solid black",
+    // height: "80rem",
+    // padding: "0rem 1rem 1rem 1rem",
+    // backgroundColor: "lightskyblue",
+    // border: "1px solid black",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
     // marginTop: "2rem",
+    paddingBottom: "7rem",
 }));
 
 export const CategoryContainer = styled(Box)(({ theme }) => ({
-    width: "22rem",
-    height: "30rem",
-    backgroundColor: "lightslategray",
-    border: "1px solid black",
+    width: "18rem",
+    height: "fit-content",
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
+    borderRadius: "7px",
     display: "none",
-    // marginTop: "2rem",
     position: "sticky",
     top: "5.5rem",
-
+    flexDirection: "column",
+    backgroundColor: "hsl(0, 0%, 95%)",
     [theme.breakpoints.up("lg")]: {
         display: "flex",
     },
 }));
+
+export const Icon = styled(Box)({
+    color: "gray",
+    position: "relative",
+
+    "& .css-i4bv87-MuiSvgIcon-root": {
+        fontSize: "2rem",
+    },
+
+    "&:hover": {
+        color: "black",
+    },
+});
