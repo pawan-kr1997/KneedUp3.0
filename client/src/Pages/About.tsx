@@ -1,9 +1,11 @@
-import { Stack as MuiStack, Button as MuiButton, Typography as MuiTypography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Button as MuiButton, Typography as MuiTypography } from "@mui/material";
 import NavBar from "../ComponentsNew/NavBar";
-import { HandleNavigation } from "../Functions/navigation";
 import { AboutContainer } from "../Styles/about.styles";
 
 const About = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <NavBar variant="primary" />
@@ -23,7 +25,7 @@ const About = () => {
                     </MuiTypography>
                 </MuiTypography>
                 <MuiTypography fontWeight={"bold"}>😊Happy preparation</MuiTypography>
-                <MuiButton variant="contained" onClick={() => <HandleNavigation location="/" />}>
+                <MuiButton variant="contained" onClick={() => navigate("/")}>
                     Go back to home
                 </MuiButton>
             </AboutContainer>

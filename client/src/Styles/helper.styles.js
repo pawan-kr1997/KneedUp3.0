@@ -10,6 +10,16 @@ export const Container = styled(MuiStack)({
     alignItems: "center",
     gap: "2rem",
 });
+export const ExceptionContainer = styled(MuiStack)({
+    width: "fit-content",
+    margin: "auto",
+    marginTop: "10rem",
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    gap: "1rem",
+});
 
 export const Button = styled(MuiButton)({
     padding: ".5rem 5rem",

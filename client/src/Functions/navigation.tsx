@@ -1,10 +1,5 @@
-import { Navigate } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 
-type HandleNavigationProps = {
-    location: string;
-};
-
-export const HandleNavigation: React.FC<HandleNavigationProps> = ({ location }) => {
-    console.log("clicked");
-    return <Navigate to="/" replace />;
+export const handleNavigation = (navigate: NavigateFunction, location: string) => {
+    navigate(location);
 };

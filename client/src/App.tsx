@@ -9,6 +9,8 @@ import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Reset from "./Pages/Reset";
 import PreReset from "./Pages/PreReset";
+import SomethingWentWrong from "./Pages/SomethingWentWrong";
+import PageNotFound from "./Pages/PageNotFound";
 
 const App = () => {
     return (
@@ -24,6 +26,22 @@ const App = () => {
             <Route path="/bookmark" element={<Bookmark />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
+            <Route
+                path="/somethingWentWrong"
+                element={
+                    <CategoryListProvider>
+                        <SomethingWentWrong />
+                    </CategoryListProvider>
+                }
+            ></Route>
+            <Route
+                path="/pageNotFound"
+                element={
+                    <CategoryListProvider>
+                        <PageNotFound />
+                    </CategoryListProvider>
+                }
+            ></Route>
             <Route path="/reset/:resetToken" element={<Reset />}></Route>
             <Route path="/reset" element={<PreReset />}></Route>
             <Route

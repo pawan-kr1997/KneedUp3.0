@@ -20,12 +20,7 @@ export const handleAuthenticationError = (setError: React.Dispatch<React.SetStat
 };
 
 export const handleUserDataError = (errorMsg: string, logoutUser: () => void, navigate: NavigateFunction): void => {
-    if (errorMsg === "JsonWebTokenError: invalid token") {
-        localStorage.removeItem("token");
-        logoutUser();
-        axios.defaults.headers.common["Authorization"] = null;
-        navigate("/login");
-    } else if (errorMsg === "TokenExpiredError: jwt expired") {
+    if (errorMsg === "JsonWebTokenError: invalid token" || errorMsg === "TokenExpiredError: jwt expired") {
         localStorage.removeItem("token");
         logoutUser();
         axios.defaults.headers.common["Authorization"] = null;
@@ -34,6 +29,21 @@ export const handleUserDataError = (errorMsg: string, logoutUser: () => void, na
         navigate("/somethingWentWrong");
     }
 };
+// export const handleUserDataError = (errorMsg: string, logoutUser: () => void, navigate: NavigateFunction): void => {
+//     if (errorMsg === "JsonWebTokenError: invalid token") {
+//         localStorage.removeItem("token");
+//         logoutUser();
+//         axios.defaults.headers.common["Authorization"] = null;
+//         navigate("/login");
+//     } else if (errorMsg === "TokenExpiredError: jwt expired") {
+//         localStorage.removeItem("token");
+//         logoutUser();
+//         axios.defaults.headers.common["Authorization"] = null;
+//         navigate("/login");
+//     } else {
+//         navigate("/somethingWentWrong");
+//     }
+// };
 
 export const handleGetPostError = (setLoading: React.Dispatch<React.SetStateAction<boolean>>, setRefreshPost: React.Dispatch<React.SetStateAction<boolean>>): void => {
     setLoading(false);
