@@ -7,7 +7,7 @@ import FeedsCardSkeleton from "./FeedsCardSkeleton";
 import FeedsHeader from "./FeedsHeader";
 
 const Feeds = () => {
-    const [data] = useGetApi();
+    // const [data] = useGetApi();
     const [loading, setLoading] = useState(false);
 
     const feedsContent = loading ? (

@@ -3,19 +3,22 @@ import React from "react";
 import { LinkContainer, LinkText, LogoContainer, SecondaryToolbar } from "../../Styles/home.styles";
 import HomeIcon from "@mui/icons-material/Home";
 import Logo from "../Logo";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { SecondaryToolbarProps } from "../../TscTypes/TscTypes";
 
-const SecondaryToolBar: React.FC = () => {
+const SecondaryToolBar: React.FC<SecondaryToolbarProps> = ({ btn }) => {
+    const navigate = useNavigate();
+
     return (
         <SecondaryToolbar>
             <LogoContainer>
                 <Logo variant="light" />
-                <LinkContainer href="/hometest">
+                <LinkContainer onClick={() => navigate("/")}>
                     <HomeIcon />
                     <LinkText>Home</LinkText>
                 </LinkContainer>
             </LogoContainer>
-            <MuiButton variant="contained">Login</MuiButton>
+            {btn}
         </SecondaryToolbar>
     );
 };

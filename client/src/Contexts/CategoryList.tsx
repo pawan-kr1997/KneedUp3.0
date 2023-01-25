@@ -1,5 +1,6 @@
 import { useContext, useState, createContext } from "react";
-import { CategoryListContextType, ChildrenProps } from "../TscTypes/TscTypes";
+import { useGetApi } from "../Hooks/useGetApi";
+import { CategoryListContextType, CategoryListProps, ChildrenProps } from "../TscTypes/TscTypes";
 
 const CategoryList = createContext<CategoryListContextType | null>(null);
 
@@ -13,9 +14,9 @@ export const useCategoryList = () => {
 };
 
 export const CategoryListProvider: React.FC<ChildrenProps> = (props) => {
-    //Logic to get category list from api
-    const [list, setList] = useState({ news: true, president: true, pib: true, prs: true });
-    const value = { list };
+    const [list, loading] = useGetApi("/feeds/category");
+    // const [list, setList] = useState({ news: true, president: true, pib: true, prs: true });
+    const value = { list, loading } as CategoryListContextType;
 
     return <CategoryList.Provider value={value}>{props.children}</CategoryList.Provider>;
 };

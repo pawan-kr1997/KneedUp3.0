@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Typography, Button, Checkbox } from "@mui/material";
 import { ChecklistButton, ChecklistContainer, ChecklistItem, ChecklistTitle } from "../../Styles/checklist.styles";
+import { ChecklistProps } from "../../TscTypes/TscTypes";
 
-const Checklist = () => {
-    const [isOpen, setIsOpen] = useState(true);
+const Checklist: React.FC<ChecklistProps> = ({ isOpen, onIsOpen }) => {
+    // const [isOpen, setIsOpen] = useState(true);
 
     return (
-        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal open={isOpen} onClose={() => onIsOpen(false)}>
             <ChecklistContainer>
                 <ChecklistTitle>Select the sites for which you want to receive notification</ChecklistTitle>
                 <ChecklistItem>

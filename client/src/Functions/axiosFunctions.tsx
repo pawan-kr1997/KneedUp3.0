@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HandleLoginParamTypes, PostApiDataType } from "../TscTypes/Functions";
+import { HandleLoginParamTypes, HandleSignupParamTypes, PostApiDataType } from "../TscTypes/Functions";
 import { handleAuthenticationError } from "./errorFunction";
 
 export const postApi = async (link: string, data: PostApiDataType) => {
@@ -18,6 +18,21 @@ export const handleLogin = async ({ e, navigate, data, setError, setLoading }: H
 
         setLoading(true);
         navigate("/");
+    } catch (err) {
+        console.log(err);
+        if (axios.isAxiosError(err)) {
+            setLoading(false);
+            handleAuthenticationError(setError, err.response?.data, navigate);
+        }
+    }
+};
+
+export const handleSignup = async ({ e, navigate, data, setError, setLoading }: HandleSignupParamTypes) => {
+    try {
+        e.preventDefault();
+        await postApi("/signup", { ...data });
+        setLoading(true);
+        navigate("/login");
     } catch (err) {
         console.log(err);
         if (axios.isAxiosError(err)) {

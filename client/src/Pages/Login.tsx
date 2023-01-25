@@ -4,6 +4,7 @@ import { TextField as MuiTextField } from "@mui/material";
 import { Alert, Button, Container, Progress } from "../Styles/helper.styles";
 import NavBar from "../ComponentsNew/NavBar";
 import { handleLogin } from "../Functions/axiosFunctions";
+import { SignupBtn } from "../ComponentsNew/Buttons/Buttons";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -15,12 +16,12 @@ const Login = () => {
 
     return (
         <>
-            <NavBar variant="secondary" />
+            <NavBar variant="secondary" button={<SignupBtn variant="contained" />} />
             <Container>
                 <MuiTextField
                     fullWidth
                     label="Email address"
-                    id="outlined-size-small"
+                    id="email"
                     size="small"
                     onChange={(event) => {
                         setEmailId(event.target.value);
@@ -30,7 +31,7 @@ const Login = () => {
                 <MuiTextField
                     fullWidth
                     label="Password"
-                    id="outlined-size-small"
+                    id="pwd"
                     size="small"
                     onChange={(event) => {
                         setPassword(event.target.value);
@@ -42,7 +43,7 @@ const Login = () => {
                         {error}
                     </Alert>
                 )}
-                <Button variant="contained" onClick={(e) => handleLogin({ e, navigate, data: { emailId, password }, setError, setLoading })}>
+                <Button variant="contained" disabled={!emailId || !password} onClick={(e) => handleLogin({ e, navigate, data: { emailId, password }, setError, setLoading })}>
                     {loading ? <Progress size={20} /> : "Login"}
                 </Button>
             </Container>

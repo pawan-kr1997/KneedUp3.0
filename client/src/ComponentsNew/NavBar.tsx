@@ -7,7 +7,7 @@ import SecondaryToolBar from "./ToolBar/SecondaryToolBar";
 import { NavBarProps } from "../TscTypes/TscTypes";
 import Drawer from "./Drawer";
 
-const NavBar: React.FC<NavBarProps> = ({ variant }) => {
+const NavBar: React.FC<NavBarProps> = ({ variant, button }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     return (
@@ -18,7 +18,7 @@ const NavBar: React.FC<NavBarProps> = ({ variant }) => {
                     <Drawer isDrawerOpen={isDrawerOpen} onIsDrawerOpen={setIsDrawerOpen} />
                 </>
             ) : (
-                <SecondaryToolBar />
+                <SecondaryToolBar btn={button} />
             )}
         </MuiAppBar>
     );

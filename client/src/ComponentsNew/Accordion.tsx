@@ -5,7 +5,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 
 import { ListItemIcon } from "../Styles/home.styles";
-import List from "./List";
+import List from "./List/List";
 
 import { NavAccordionProps } from "../TscTypes/TscTypes";
 

@@ -103,17 +103,26 @@ export const FeedsContainer = styled(Box)(({ theme }) => ({
 export const CategoryContainer = styled(Box)(({ theme }) => ({
     width: "18rem",
     height: "fit-content",
-    paddingTop: "1rem",
-    paddingBottom: "1rem",
-    borderRadius: "7px",
-    display: "none",
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
     position: "sticky",
     top: "5.5rem",
-    flexDirection: "column",
-    backgroundColor: "hsl(0, 0%, 95%)",
+    display: "none",
     [theme.breakpoints.up("lg")]: {
         display: "flex",
     },
+}));
+
+export const CategoryListContainer = styled(Box)(({ theme }) => ({
+    width: "18rem",
+    height: "fit-content",
+    paddingTop: ".2rem",
+    paddingBottom: ".2rem",
+    // borderRadius: "7px",
+    flexDirection: "column",
+    borderLeft: "2px dashed #1976d2",
+    // backgroundColor: "hsl(0, 0%, 97%)",
 }));
 
 export const Icon = styled(Box)({

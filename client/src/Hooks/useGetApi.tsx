@@ -1,30 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useLoading } from "./useLoading";
 import axios from "axios";
 import { getFeedUrlAndHeader } from "../Functions/componentFunctions";
+import { CategoryListProps } from "../TscTypes/TscTypes";
 
-export const useGetApi = () => {
-    let navigate = useNavigate();
-    let params = useParams();
-    const [data, setData] = useState();
-    const [loading, setLoading] = useLoading();
+export const useGetApi = (link: string) => {
+    const [data, setData] = useState<CategoryListProps | undefined>();
+    const [loading, setLoading] = useState(true);
 
-    const feedData = getFeedUrlAndHeader(params.category, navigate);
+    const handleFetch = async () => {
+        const cancelToken = axios.CancelToken.source();
+        try {
+            const response = await axios.get(link, { cancelToken: cancelToken.token });
+            console.log(response.data);
+            setLoading(false);
+            setData(response.data.data);
+        } catch (err) {
+            setLoading(true);
+            console.log(err);
+        }
+    };
 
-    console.log(`url is: ${feedData.url} and header text is: ${feedData.headerText}`);
+    useEffect(() => {
+        handleFetch();
+    }, [JSON.stringify(data)]);
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const cancelToken = axios.CancelToken.source();
-    //         try {
-    //             const feeds = await axios.get(link, { cancelToken: cancelToken.token });
-    //             console.log(feeds.data);
-    //         } catch (err) {
-    //             console.log(err);
-    //         }
-    //     })();
-    // }, []);
-
-    return [data];
+    return [data, loading] as const;
 };
