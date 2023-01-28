@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import Login from "../Login";
 import { rest } from "msw";
 import { server } from "../../Mocks/server";
-import { act } from "react-dom/test-utils";
 
 test("button enabling and disabling based on textfield", async () => {
     render(<Login />, { wrapper: BrowserRouter });
@@ -19,16 +18,16 @@ test("button enabling and disabling based on textfield", async () => {
 });
 
 test("Alert message appears on failure", async () => {
-    rest.post("http://localhost:8090/login", (req, res, ctx) => {
-        return res(
-            ctx.status(500)
-            // ctx.json({
-            //     response: {
-            //         data: "Error: Email id is not valid",
-            //     },
-            // })
-        );
-    });
+    server.resetHandlers(
+        rest.post("http://localhost:8090/login", (req, res, ctx) => {
+            return res(
+                ctx.status(500),
+                ctx.json({
+                    data: "Error: Email id is not valid",
+                })
+            );
+        })
+    );
 
     render(<Login />, { wrapper: BrowserRouter });
     const user = userEvent.setup();
@@ -39,10 +38,8 @@ test("Alert message appears on failure", async () => {
 
     await user.type(emailTextField, "hello");
     await user.type(passwordTextField, "12345");
-    // await userEvent.click(LoginBtn);
-    await act(async () => {
-        await user.click(LoginBtn);
-    });
+    await userEvent.click(LoginBtn);
+
     const alertEl = await screen.findByRole("alert");
 
     expect(alertEl).toBeInTheDocument();

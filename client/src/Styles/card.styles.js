@@ -1,4 +1,4 @@
-import { Box as MuiBox, styled, Typography as MuiTypography, Stack as MuiStack } from "@mui/material";
+import { Box as MuiBox, styled, Typography as MuiTypography, Link as MuiLink, Stack as MuiStack } from "@mui/material";
 
 export const Card = styled(MuiBox)({
     border: "1px solid lightgray",
@@ -29,9 +29,11 @@ export const CardDate = styled(MuiTypography)(({ theme }) => ({
     },
 }));
 
-export const CardContent = styled(MuiTypography)({
+export const CardContent = styled(MuiLink)({
     fontSize: "1.2rem",
     fontWeight: "bold",
+    color: "black",
+    textDecoration: "none",
     textOverflow: "ellipsis",
     overflow: "hidden",
     display: "-webkit-box",

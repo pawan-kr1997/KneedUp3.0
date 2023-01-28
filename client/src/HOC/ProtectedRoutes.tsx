@@ -1,9 +1,9 @@
 import react from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "../../Contexts/Auth";
-import { CategoryListProvider } from "../../Contexts/CategoryList";
-import { Navigate, Route, RouteProps, Outlet } from "react-router-dom";
-import { ChildrenProps } from "../../TscTypes/TscTypes";
+import { AuthProvider, useAuth } from "../Contexts/Auth";
+import { CategoryListProvider } from "../Contexts/CategoryList";
+import { Navigate, Outlet } from "react-router-dom";
+import { ChildrenProps } from "../TscTypes/TscTypes";
 
 // type ProtectedRouteProps = RouteProps & {};
 

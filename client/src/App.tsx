@@ -12,7 +12,8 @@ import Reset from "./Pages/Reset";
 import PreReset from "./Pages/PreReset";
 import SomethingWentWrong from "./Pages/SomethingWentWrong";
 import PageNotFound from "./Pages/PageNotFound";
-import { HomeProvider, ProtectedRoute } from "./ComponentsNew/HOC/ProtectedRoutes";
+import { HomeProvider, ProtectedRoute } from "./HOC/ProtectedRoutes";
+import Feeds from "./ComponentsNew/Feeds/Feeds";
 
 const App = () => {
     return (
@@ -24,7 +25,18 @@ const App = () => {
                         <Home />
                     </HomeProvider>
                 }
-            />
+            >
+                <Route path="/:category" element={<Feeds />} />
+            </Route>
+
+            {/* <Route
+                path="/"
+                element={
+                    <HomeProvider>
+                        <Home />
+                    </HomeProvider>
+                }
+            /> */}
             {/* <Route
                 path="/bookmark"
                 element={
@@ -36,15 +48,22 @@ const App = () => {
 
             <Route
                 element={
-                    <AuthProvider>
+                    <HomeProvider>
                         <ProtectedRoute />
-                    </AuthProvider>
+                    </HomeProvider>
                 }
             >
                 <Route path="/bookmark" element={<Bookmark />} />
             </Route>
 
-            <Route path="/login" element={<Login />} />
+            <Route
+                path="/login"
+                element={
+                    <HomeProvider>
+                        <Login />
+                    </HomeProvider>
+                }
+            />
             <Route path="/signup" element={<Signup />}></Route>
             <Route
                 path="/somethingWentWrong"

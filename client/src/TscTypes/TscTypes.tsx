@@ -47,6 +47,7 @@ export type CategoryListProps = {
 export type CategoryListContextType = {
     list: CategoryListProps;
     loading: boolean;
+    setList: React.Dispatch<React.SetStateAction<CategoryListProps | Post[] | undefined>>;
 };
 
 export type NavBarProps = {
@@ -84,4 +85,22 @@ export type ChecklistProps = {
 
 export type SidebarProps = {
     onIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type Post = {
+    id: string;
+    title: string;
+    url: string;
+    category: string;
+    source: string;
+    createdAt: number;
+    updatedAt: number;
+};
+
+export type FeedsCardProps = {
+    post: Post;
+};
+
+export type FeedsHeaderProps = {
+    header: string;
 };

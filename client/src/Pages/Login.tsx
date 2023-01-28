@@ -5,9 +5,13 @@ import { Alert, Button, Container, Progress } from "../Styles/helper.styles";
 import NavBar from "../ComponentsNew/NavBar";
 import { handleLogin } from "../Functions/axiosFunctions";
 import { SignupBtn } from "../ComponentsNew/Buttons/Buttons";
+import { useAuth } from "../Contexts/Auth";
+import { useCategoryList } from "../Contexts/CategoryList";
 
 const Login = () => {
     const navigate = useNavigate();
+    const { setIsLogged } = useAuth();
+    const { list } = useCategoryList();
 
     const [error, setError] = useState("");
     const [emailId, setEmailId] = useState("");
@@ -43,7 +47,7 @@ const Login = () => {
                         {error}
                     </Alert>
                 )}
-                <Button variant="contained" disabled={!emailId || !password} onClick={(e) => handleLogin({ e, navigate, data: { emailId, password }, setError, setLoading })}>
+                <Button variant="contained" disabled={!emailId || !password} onClick={(e) => handleLogin({ e, navigate, data: { emailId, password }, setError, setLoading, setIsLogged, list })}>
                     {loading ? <Progress size={20} /> : "Login"}
                 </Button>
             </Container>

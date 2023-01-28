@@ -22,7 +22,7 @@ import AuthButtonGrp from "./Buttons/AuthButtonGrp";
 
 const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
     const { list, loading } = useCategoryList();
-    console.log(`list: ${list} anf loading: ${loading}`);
+    // console.log(`list: ${list} anf loading: ${loading}`);
 
     return (
         <MuiDrawer anchor="left" open={isDrawerOpen} onClose={() => onIsDrawerOpen(false)}>

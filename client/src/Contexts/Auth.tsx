@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { AuthContextType } from "../TscTypes/ContextTypes";
 import { ChildrenProps } from "../TscTypes/TscTypes";
 
@@ -13,7 +13,8 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<ChildrenProps> = ({ children }) => {
-    const isLogged = localStorage.getItem("token") ? true : false;
-    const value = { isLogged };
+    const [isLogged, setIsLogged] = useState(localStorage.getItem("token") ? true : false);
+
+    const value = { isLogged, setIsLogged };
     return <Auth.Provider value={value}>{children}</Auth.Provider>;
 };

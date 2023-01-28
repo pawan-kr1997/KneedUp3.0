@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import CategorySidebar from "../ComponentsNew/CategoryBar/CategoryBar";
 import Checklist from "../ComponentsNew/Checklist/Checklist";
 import Feeds from "../ComponentsNew/Feeds/Feeds";
@@ -15,7 +16,7 @@ const Home = () => {
             <Checklist isOpen={isOpen} onIsOpen={setIsOpen} />
             <ContentSection>
                 <Sidebar onIsOpen={setIsOpen} />
-                <Feeds />
+                <Outlet />
                 <CategorySidebar />
             </ContentSection>
         </>

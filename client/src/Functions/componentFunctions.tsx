@@ -57,3 +57,27 @@ export const getFeedUrlAndHeader = (paramsCategory: string | undefined, navigate
 
     return { url: url, headerText: headerText };
 };
+
+export const getPostDateWithShortMonth = (postDate: number): string => {
+    let date = new Date(postDate);
+    let fullDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    let shortMonth = fullDate.toLocaleString("en-us", { month: "short" });
+
+    return date.getDate() + " " + shortMonth + " " + date.getFullYear();
+};
+
+export const configurePostUrl = (paramsCategory: string, url: string): string => {
+    if (
+        paramsCategory === "newsOnAir_National" ||
+        paramsCategory === "newsOnAir_International" ||
+        paramsCategory === "newsOnAir_Business" ||
+        paramsCategory === "newsOnAir_Sports" ||
+        paramsCategory === "idsa_commentsAndBriefs" ||
+        paramsCategory === "prs_Blogs" ||
+        paramsCategory === "prs_Articles"
+    ) {
+        return "https://" + url;
+    } else {
+        return url;
+    }
+};

@@ -1,4 +1,5 @@
 import { NavigateFunction } from "react-router-dom";
+import { CategoryListProps } from "./TscTypes";
 
 export type GetFeedUrlAndHeaderReturnType = {
     url: string;
@@ -24,6 +25,8 @@ export type HandleLoginParamTypes = {
     data: LoginDataType;
     setError: React.Dispatch<React.SetStateAction<string>>;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
+    list: CategoryListProps;
 };
 
 export type HandleSignupParamTypes = {

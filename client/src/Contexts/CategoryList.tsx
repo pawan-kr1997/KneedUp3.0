@@ -14,9 +14,8 @@ export const useCategoryList = () => {
 };
 
 export const CategoryListProvider: React.FC<ChildrenProps> = (props) => {
-    const [list, loading] = useGetApi("/feeds/category");
-    // const [list, setList] = useState({ news: true, president: true, pib: true, prs: true });
-    const value = { list, loading } as CategoryListContextType;
+    const [list, loading, setList] = useGetApi("/feeds/category");
+    const value = { list, loading, setList } as CategoryListContextType;
 
     return <CategoryList.Provider value={value}>{props.children}</CategoryList.Provider>;
 };
