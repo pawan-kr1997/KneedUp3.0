@@ -62,8 +62,9 @@ export const getUserCategoryField = async (req: ExtendedRequest, res: Response, 
     try {
         const user = await getUserFromDbUsingId(req.userId);
 
-        res.status(200).json({ message: "Category data sent", category: user.category });
+        res.status(200).json({ message: "Category data sent", data: user.category });
     } catch (err) {
+        console.log(err);
         next(err);
     }
 };
@@ -73,7 +74,7 @@ export const updateUserCategoryField = async (req: ExtendedRequest, res: Respons
         const user = await getUserFromDbUsingId(req.userId);
         const updatedUser = await updateUserCategory(req);
 
-        res.status(200).json({ message: "Category data refreshed", result: updatedUser });
+        res.status(200).json({ message: "Category data refreshed", data: updatedUser });
     } catch (err) {
         console.log(err);
         next(err);

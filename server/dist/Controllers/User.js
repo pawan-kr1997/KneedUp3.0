@@ -47,9 +47,10 @@ const getUserCategoryField = (req, res, next) => __awaiter(void 0, void 0, void 
     console.log("getuserCategory: " + req.userId);
     try {
         const user = yield (0, databaseFunctions_1.getUserFromDbUsingId)(req.userId);
-        res.status(200).json({ message: "Category data sent", category: user.category });
+        res.status(200).json({ message: "Category data sent", data: user.category });
     }
     catch (err) {
+        console.log(err);
         next(err);
     }
 });
@@ -58,7 +59,7 @@ const updateUserCategoryField = (req, res, next) => __awaiter(void 0, void 0, vo
     try {
         const user = yield (0, databaseFunctions_1.getUserFromDbUsingId)(req.userId);
         const updatedUser = yield (0, databaseFunctions_1.updateUserCategory)(req);
-        res.status(200).json({ message: "Category data refreshed", result: updatedUser });
+        res.status(200).json({ message: "Category data refreshed", data: updatedUser });
     }
     catch (err) {
         console.log(err);

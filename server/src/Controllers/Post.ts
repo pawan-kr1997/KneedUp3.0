@@ -3,6 +3,8 @@ import { ExtendedRequest } from "../Utils/tscTypes";
 const prisma = require("../../prisma/index.js");
 
 export const getPosts = async (req: ExtendedRequest, res: Response, next: NextFunction) => {
+    // console.log(`sourceid: ${req.sourceId} and category: ${req.category}`);
+
     try {
         const posts = await prisma.posts.findMany({
             where: {
@@ -11,7 +13,7 @@ export const getPosts = async (req: ExtendedRequest, res: Response, next: NextFu
             },
         });
 
-        res.status(200).json({ message: "posts of sent", posts: posts });
+        res.status(200).json({ message: "posts of sent", data: posts });
     } catch (err) {
         console.log(err);
     }

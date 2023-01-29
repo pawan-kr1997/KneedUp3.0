@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPosts = void 0;
 const prisma = require("../../prisma/index.js");
 const getPosts = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    // console.log(`sourceid: ${req.sourceId} and category: ${req.category}`);
     try {
         const posts = yield prisma.posts.findMany({
             where: {
@@ -19,7 +20,7 @@ const getPosts = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
                 category: req.category,
             },
         });
-        res.status(200).json({ message: "posts of sent", posts: posts });
+        res.status(200).json({ message: "posts of sent", data: posts });
     }
     catch (err) {
         console.log(err);

@@ -10,7 +10,7 @@ export const useFeeds = () => {
     const navigate = useNavigate();
     const feedsData = getFeedUrlAndHeader(params.category, navigate);
     useScrollTop();
-    useInitFeeds();
+    // useInitFeeds();
     const [data, loading] = useGetApi(feedsData.url);
     return [data, loading, feedsData.headerText] as const;
 };
