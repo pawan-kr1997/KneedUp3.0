@@ -14,7 +14,7 @@ export const getUserSubscriptionStatus = async (req: ExtendedRequest, res: Respo
     try {
         const user = await getUserFromDbUsingId(req.userId);
 
-        res.status(200).json({ message: "User subscription status", subscriptionStatus: user.subscriptionStatus });
+        res.status(200).json({ message: "User subscription status", status: user.subscriptionStatus });
     } catch (err) {
         next(err);
     }
@@ -29,7 +29,7 @@ export const getUserSubscriptionDueDate = async (req: ExtendedRequest, res: Resp
             limit: 1,
         });
 
-        res.status(200).json({ message: "Subscription due date", subscriptionDueDate: subscription.data[0].current_period_end });
+        res.status(200).json({ message: "Subscription due date", date: subscription.data[0].current_period_end });
     } catch (err) {
         next(err);
     }

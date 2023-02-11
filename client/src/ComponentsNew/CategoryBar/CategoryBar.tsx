@@ -5,15 +5,17 @@ import AuthButtonGrp from "../Buttons/AuthButtonGrp";
 import ListContainer from "../List/ListContainer";
 import ListItem from "../List/ListItem";
 import CategoryBarSkeleton from "./CategoryBarSkeleton";
+import { useIsFetching } from "react-query";
 
 const CategoryBar = () => {
-    const { list, loading } = useCategoryList();
+    const { list } = useCategoryList();
+    const isFetching = useIsFetching(["categoryList"]);
 
     return (
         <CategoryContainer>
             <AuthButtonGrp />
             <CategoryListContainer>
-                {loading ? (
+                {isFetching ? (
                     <CategoryBarSkeleton />
                 ) : (
                     <>

@@ -13,7 +13,7 @@ export const getPosts = async (req: ExtendedRequest, res: Response, next: NextFu
             },
         });
 
-        res.status(200).json({ message: "posts of sent", data: posts });
+        res.status(200).json({ message: "posts of sent", feeds: posts });
     } catch (err) {
         console.log(err);
     }

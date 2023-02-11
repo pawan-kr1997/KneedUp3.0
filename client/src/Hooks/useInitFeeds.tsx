@@ -8,7 +8,7 @@ export const useInitFeeds = () => {
     const { list } = useCategoryList();
     const { isLogged } = useAuth();
     const navigate = useNavigate();
-    console.log(list);
+    // console.log(list);
     useEffect(() => {
         if (list) {
             handleInitNavigation(navigate, list);

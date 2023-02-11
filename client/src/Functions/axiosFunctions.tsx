@@ -1,47 +1,69 @@
 import axios from "axios";
-import { HandleLoginParamTypes, HandleSignupParamTypes, PostApiDataType } from "../TscTypes/Functions";
-import { handleAuthenticationError } from "./errorFunction";
-import { handleInitNavigation } from "./navigation";
+import { signupUserParams, loginUserParams, fetchFeedsParams } from "../TscTypes/Functions";
+import { CategoryListProps } from "../TscTypes/TscTypes";
 
-export const postApi = async (link: string, data: PostApiDataType) => {
-    const cancelToken = axios.CancelToken.source();
-    const response = await axios.post(link, { ...data }, { cancelToken: cancelToken.token });
-    return response.data;
+export const loginUser = async ({ emailId, password }: loginUserParams) => {
+    const { data } = await axios.post("/login", { emailId, password });
+    // console.log(data);
+    return data;
 };
 
-export const handleLogin = async ({ e, navigate, data, setError, setLoading, setIsLogged, list }: HandleLoginParamTypes) => {
-    try {
-        e.preventDefault();
-        const userData = await postApi("/login", { ...data });
-
-        localStorage.setItem("token", userData.token);
-        axios.defaults.headers.common["Authorization"] = userData.token;
-        setLoading(true);
-        setIsLogged(true);
-        handleInitNavigation(navigate, list);
-        // navigate("/");
-
-        // window.location.reload();
-    } catch (err) {
-        console.log(err);
-        if (axios.isAxiosError(err)) {
-            setLoading(false);
-            handleAuthenticationError(setError, err.response?.data, navigate);
-        }
-    }
+export const signupUser = async ({ emailId, password, confirmPassword }: signupUserParams) => {
+    const { data } = await axios.post("/signup", { emailId, password, confirmPassword });
+    // console.log(data);
+    return data;
 };
 
-export const handleSignup = async ({ e, navigate, data, setError, setLoading }: HandleSignupParamTypes) => {
-    try {
-        e.preventDefault();
-        await postApi("/signup", { ...data });
-        setLoading(true);
-        navigate("/login");
-    } catch (err) {
-        console.log(err);
-        if (axios.isAxiosError(err)) {
-            setLoading(false);
-            handleAuthenticationError(setError, err.response?.data, navigate);
-        }
-    }
+export const fetchCategoryList = async () => {
+    const { data } = await axios.get("/feeds/category");
+    // console.log(data);
+    return data.category;
+};
+
+export const updateCategory = async ({ news, president, pib, prs }: CategoryListProps) => {
+    const { data } = await axios.post("/feeds/category", {
+        News: news,
+        President: president,
+        Pib: pib,
+        Prs: prs,
+    });
+
+    // console.log(data);
+    return data;
+};
+
+export const fetchBookmarks = async () => {
+    const { data } = await axios.get("/bookmark");
+    // console.log(data);
+    return data.bookmark;
+};
+
+export const fetchFeeds = async (url: string) => {
+    const { data } = await axios.get(url);
+    // console.log(data);
+    return data.feeds;
+};
+
+export const deleteBookmark = async (postId: string) => {
+    const { data } = await axios.get("/postUnmark/" + postId);
+    // console.log("delete bookmark: " + data.user);
+    return data.user.bookmark;
+};
+
+export const addBookmark = async (postId: string) => {
+    const { data } = await axios.get("/postBookmark/" + postId);
+    // console.log("add bookmark: " + data.user);
+    return data.user.bookmark;
+};
+
+export const fetchSubscriptionStatus = async () => {
+    const { data } = await axios.get("/subscriptionStatus");
+    console.log(data);
+    return data.status;
+};
+
+export const fetchDueDate = async () => {
+    const { data } = await axios.get("/subscriptionStatus");
+    console.log(data);
+    return data.data;
 };

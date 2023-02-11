@@ -1,8 +1,5 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
 import { CategoryListProvider } from "./Contexts/CategoryList";
-import { AuthProvider } from "./Contexts/Auth";
 import Home from "./Pages/Home";
 import Bookmark from "./Pages/Bookmark";
 import About from "./Pages/About";
@@ -12,8 +9,9 @@ import Reset from "./Pages/Reset";
 import PreReset from "./Pages/PreReset";
 import SomethingWentWrong from "./Pages/SomethingWentWrong";
 import PageNotFound from "./Pages/PageNotFound";
-import { HomeProvider, ProtectedRoute } from "./HOC/ProtectedRoutes";
+import { AuthProtectedRoute, HomeProvider, SubsProtectedRoute } from "./HOC/ProtectedRoutes";
 import Feeds from "./ComponentsNew/Feeds/Feeds";
+import Subscription from "./Pages/Subscription/Subscription";
 
 const App = () => {
     return (
@@ -29,31 +27,24 @@ const App = () => {
                 <Route path="/:category" element={<Feeds />} />
             </Route>
 
-            {/* <Route
-                path="/"
-                element={
-                    <HomeProvider>
-                        <Home />
-                    </HomeProvider>
-                }
-            /> */}
-            {/* <Route
-                path="/bookmark"
-                element={
-                    <AuthProvider>
-                        <ProtectedRoute path="/bookmark" element={<Bookmark />} />
-                    </AuthProvider>
-                }
-            /> */}
-
             <Route
                 element={
                     <HomeProvider>
-                        <ProtectedRoute />
+                        <SubsProtectedRoute />
                     </HomeProvider>
                 }
             >
                 <Route path="/bookmark" element={<Bookmark />} />
+            </Route>
+
+            <Route
+                element={
+                    <HomeProvider>
+                        <AuthProtectedRoute />
+                    </HomeProvider>
+                }
+            >
+                <Route path="/subscription" element={<Subscription />} />
             </Route>
 
             <Route
@@ -64,7 +55,14 @@ const App = () => {
                     </HomeProvider>
                 }
             />
-            <Route path="/signup" element={<Signup />}></Route>
+            <Route
+                path="/signup"
+                element={
+                    <HomeProvider>
+                        <Signup />
+                    </HomeProvider>
+                }
+            ></Route>
             <Route
                 path="/somethingWentWrong"
                 element={

@@ -47,7 +47,7 @@ const getUserCategoryField = (req, res, next) => __awaiter(void 0, void 0, void 
     console.log("getuserCategory: " + req.userId);
     try {
         const user = yield (0, databaseFunctions_1.getUserFromDbUsingId)(req.userId);
-        res.status(200).json({ message: "Category data sent", data: user.category });
+        res.status(200).json({ message: "Category data sent", category: user.category });
     }
     catch (err) {
         console.log(err);
@@ -100,7 +100,7 @@ exports.deletePostFromUserBookmarks = deletePostFromUserBookmarks;
 const getUserBookmarks = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, databaseFunctions_1.getUserFromDbUsingId)(req.userId);
-        res.status(200).json({ message: "init bookmark", data: user.bookmark });
+        res.status(200).json({ message: "init bookmark", bookmark: user.bookmark });
     }
     catch (err) {
         console.log(err);

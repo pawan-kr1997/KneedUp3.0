@@ -4,26 +4,33 @@ import { Stack, IconButton } from "@mui/material";
 
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ShareIcon from "@mui/icons-material/Share";
+import { BookmarkProps } from "../../TscTypes/TscTypes";
+import { getPostDateWithShortMonth } from "../../Functions/componentFunctions";
 
-const BookmarkCard = () => {
+const BookmarkCard: React.FC<BookmarkProps> = ({ post, onDelete }) => {
+    const postDate = getPostDateWithShortMonth(post.date);
+
     return (
         <Card>
             <CardHeader>
-                <CardSource>Press information bureau/press releases</CardSource>
-                <CardDate>Posted on: 20 jul 22</CardDate>
+                <CardSource>{post.category}</CardSource>
+                <CardDate>Posted on: {postDate}</CardDate>
             </CardHeader>
 
-            <CardContent>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt m
+            <CardContent href={"https://" + post.url} target="_blank" rel="noopener noreferrer">
+                {post.title}
             </CardContent>
             <Stack direction="row" spacing={2}>
-                <IconButton>
-                    <BookmarkBorderIcon />
-                </IconButton>
-                <IconButton>
+                <IconButton onClick={() => onDelete(post.id)}>
                     <DeleteOutlineIcon />
+                </IconButton>
+                <IconButton
+                    onClick={() => {
+                        navigator.clipboard.writeText("https://" + post.url);
+                    }}
+                >
+                    <ShareIcon />
                 </IconButton>
             </Stack>
         </Card>

@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { UseMutateFunction } from "react-query/types/react";
 
 export type LogoProps = {
     variant: string;
@@ -46,9 +47,12 @@ export type CategoryListProps = {
 
 export type CategoryListContextType = {
     list: CategoryListProps;
-    loading: boolean;
-    setList: React.Dispatch<React.SetStateAction<CategoryListProps | Post[] | undefined>>;
 };
+// export type CategoryListContextType = {
+//     list: CategoryListProps;
+//     loading: boolean;
+//     setList: React.Dispatch<React.SetStateAction<CategoryListProps | Post[] | undefined>>;
+// };
 
 export type NavBarProps = {
     variant: string;
@@ -99,8 +103,27 @@ export type Post = {
 
 export type FeedsCardProps = {
     post: Post;
+    // onBookmark: (postId: string) => Promise<void>;
+    // onUnmark: (postId: string) => Promise<void>;
+    onBookmark: UseMutateFunction<BookmarkData, unknown, string, unknown>;
+    onUnmark: UseMutateFunction<BookmarkData, unknown, string, unknown>;
+    isBookmark: boolean;
+};
+
+export type BookmarkProps = {
+    post: BookmarkData;
+    // onDelete: (postId: string) => Promise<void>;
+    onDelete: UseMutateFunction<BookmarkData, unknown, string, unknown>;
 };
 
 export type FeedsHeaderProps = {
     header: string;
+};
+
+export type BookmarkData = {
+    id: string;
+    date: number;
+    title: string;
+    url: string;
+    category: string;
 };

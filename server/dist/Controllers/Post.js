@@ -20,7 +20,7 @@ const getPosts = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
                 category: req.category,
             },
         });
-        res.status(200).json({ message: "posts of sent", data: posts });
+        res.status(200).json({ message: "posts of sent", feeds: posts });
     }
     catch (err) {
         console.log(err);

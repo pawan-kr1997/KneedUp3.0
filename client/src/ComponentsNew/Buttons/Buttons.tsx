@@ -2,7 +2,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button as MuiButton } from "@mui/material";
 import { useAuth } from "../../Contexts/Auth";
-import { useCategoryList } from "../../Contexts/CategoryList";
+import { useQueryClient } from "react-query";
 
 type ButtonProps = {
     variant: "text" | "outlined" | "contained" | undefined;
@@ -29,7 +29,7 @@ export const SignupBtn: React.FC<ButtonProps> = ({ variant }) => {
 export const LogoutBtn: React.FC<ButtonProps> = ({ variant }) => {
     const navigate = useNavigate();
     const { setIsLogged } = useAuth();
-    const { setList } = useCategoryList();
+    const queryClient = useQueryClient();
     return (
         <MuiButton
             variant={variant}
@@ -37,13 +37,9 @@ export const LogoutBtn: React.FC<ButtonProps> = ({ variant }) => {
                 navigate("/newsOnAir_National");
                 localStorage.removeItem("token");
                 axios.defaults.headers.common["Authorization"] = null;
+                queryClient.invalidateQueries(["categoryList"]);
+                queryClient.invalidateQueries("bookmark");
                 setIsLogged(false);
-                setList({
-                    news: true,
-                    president: true,
-                    pib: true,
-                    prs: true,
-                });
             }}
         >
             Logout

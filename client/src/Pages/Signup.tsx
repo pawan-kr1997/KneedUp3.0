@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField as MuiTextField } from "@mui/material";
-import { Alert, Button, Container, Progress } from "../Styles/helper.styles";
+import { Alert, Button, Container } from "../Styles/helper.styles";
 import NavBar from "../ComponentsNew/NavBar";
-import { handleSignup } from "../Functions/axiosFunctions";
+import { signupUser } from "../Functions/axiosFunctions";
 import { LoginBtn } from "../ComponentsNew/Buttons/Buttons";
+import { signupUserParams } from "../TscTypes/Functions";
+import { useMutation } from "react-query";
+import axios from "axios";
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -13,7 +16,21 @@ const Signup = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
+
+    const { mutate: handleSignup } = useMutation(({ emailId, password, confirmPassword }: signupUserParams) => signupUser({ emailId, password, confirmPassword }), {
+        onSuccess: (data) => {
+            navigate("/login");
+        },
+
+        onError: (error) => {
+            console.log(error);
+            if (axios.isAxiosError(error)) {
+                setError(error.response?.data);
+            } else {
+                navigate("/somethingWentWrong");
+            }
+        },
+    });
 
     return (
         <>
@@ -55,8 +72,8 @@ const Signup = () => {
                         {error}
                     </Alert>
                 )}
-                <Button variant="contained" onClick={(e) => handleSignup({ e, navigate, data: { emailId, password, confirmPassword }, setError, setLoading })}>
-                    {loading ? <Progress size={20} /> : "Create new user"}
+                <Button variant="contained" disabled={!emailId || !password || !confirmPassword} onClick={() => handleSignup({ emailId, password, confirmPassword })}>
+                    Create new user
                 </Button>
             </Container>
         </>

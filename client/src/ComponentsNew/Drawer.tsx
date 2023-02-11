@@ -19,9 +19,12 @@ import ListItem from "./List/ListItem";
 import Accordion from "./Accordion";
 import { DrawerProps } from "../TscTypes/TscTypes";
 import AuthButtonGrp from "./Buttons/AuthButtonGrp";
+import { useIsFetching } from "react-query";
 
 const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
-    const { list, loading } = useCategoryList();
+    const isFetching = useIsFetching(["categoryList"]);
+    const { list } = useCategoryList();
+
     // console.log(`list: ${list} anf loading: ${loading}`);
 
     return (
@@ -49,7 +52,7 @@ const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
                     </ListItem>
                 </List>
                 <MuiBox>
-                    {loading ? null : (
+                    {isFetching ? null : (
                         <>
                             {list.news && (
                                 <Accordion category="News on air" icon={<NewspaperIcon />}>

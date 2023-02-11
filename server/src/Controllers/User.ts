@@ -62,7 +62,7 @@ export const getUserCategoryField = async (req: ExtendedRequest, res: Response, 
     try {
         const user = await getUserFromDbUsingId(req.userId);
 
-        res.status(200).json({ message: "Category data sent", data: user.category });
+        res.status(200).json({ message: "Category data sent", category: user.category });
     } catch (err) {
         console.log(err);
         next(err);
@@ -117,7 +117,7 @@ export const getUserBookmarks = async (req: ExtendedRequest, res: Response, next
     try {
         const user = await getUserFromDbUsingId(req.userId);
 
-        res.status(200).json({ message: "init bookmark", data: user.bookmark });
+        res.status(200).json({ message: "init bookmark", bookmark: user.bookmark });
     } catch (err) {
         console.log(err);
         next(err);

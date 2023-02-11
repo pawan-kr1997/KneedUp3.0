@@ -9,7 +9,10 @@ export const authMiddleware = async (req: ExtendedRequest, res: Response, next: 
         if (!token) {
             return res.status(200).json({
                 message: "Not logged In",
-                data: { news: true, president: true, niti: true, idsa: true, pib: true, prs: true },
+                category: { news: true, president: true, niti: true, idsa: true, pib: true, prs: true },
+                user: { bookmark: [] },
+                status: false,
+                date: "",
             });
         }
 

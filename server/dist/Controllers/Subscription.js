@@ -19,7 +19,7 @@ const CANCEL_URL = "http://localhost:3000/subscription?canceled=true";
 const getUserSubscriptionStatus = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, databaseFunctions_1.getUserFromDbUsingId)(req.userId);
-        res.status(200).json({ message: "User subscription status", subscriptionStatus: user.subscriptionStatus });
+        res.status(200).json({ message: "User subscription status", status: user.subscriptionStatus });
     }
     catch (err) {
         next(err);
@@ -33,7 +33,7 @@ const getUserSubscriptionDueDate = (req, res, next) => __awaiter(void 0, void 0,
             customer: user.stripeUserId,
             limit: 1,
         });
-        res.status(200).json({ message: "Subscription due date", subscriptionDueDate: subscription.data[0].current_period_end });
+        res.status(200).json({ message: "Subscription due date", date: subscription.data[0].current_period_end });
     }
     catch (err) {
         next(err);

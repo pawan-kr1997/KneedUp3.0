@@ -4,6 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import Login from "../Login";
 import { rest } from "msw";
 import { server } from "../../Mocks/server";
+import { CategoryListProvider } from "../../Contexts/CategoryList";
+import { ChildrenProps } from "../../TscTypes/TscTypes";
+import { AuthProvider } from "../../Contexts/Auth";
 
 test("button enabling and disabling based on textfield", async () => {
     render(<Login />, { wrapper: BrowserRouter });
@@ -17,6 +20,16 @@ test("button enabling and disabling based on textfield", async () => {
     expect(LoginBtn).not.toBeDisabled();
 });
 
+const DrawerProvider: React.FC<ChildrenProps> = ({ children }) => {
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <CategoryListProvider>{children}</CategoryListProvider>
+            </AuthProvider>
+        </BrowserRouter>
+    );
+};
+
 test("Alert message appears on failure", async () => {
     server.resetHandlers(
         rest.post("http://localhost:8090/login", (req, res, ctx) => {
@@ -29,7 +42,7 @@ test("Alert message appears on failure", async () => {
         })
     );
 
-    render(<Login />, { wrapper: BrowserRouter });
+    render(<Login />, { wrapper: DrawerProvider });
     const user = userEvent.setup();
 
     const emailTextField = screen.getByLabelText(/email address/i);
