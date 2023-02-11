@@ -1,19 +1,13 @@
-import { useQuery } from "react-query";
 import { Button, Stack, Typography } from "@mui/material";
 import { SuccessDisplayProps } from "../../TscTypes/PageTypes";
 import { useSubscription } from "../../Contexts/Subscription";
-import { fetchDueDate } from "../../Functions/axiosFunctions";
 import { StatusFail, StatusSuccess } from "../../Styles/helper.styles";
+import { useSubs } from "../../Hooks/useSubs";
 
 const SuccessDisplay: React.FC<SuccessDisplayProps> = ({ sessionId }) => {
     const token = localStorage.getItem("token");
     const { subscriptionStatus } = useSubscription();
-    const fallback = "";
-    const { data: dueDate = fallback } = useQuery("subsDate", fetchDueDate, {
-        onError: (err) => {
-            console.log(err);
-        },
-    });
+    const { dueDate } = useSubs();
 
     return (
         <Stack spacing={1.5} justifyContent="center">

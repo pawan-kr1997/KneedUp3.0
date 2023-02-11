@@ -58,12 +58,12 @@ export const addBookmark = async (postId: string) => {
 
 export const fetchSubscriptionStatus = async () => {
     const { data } = await axios.get("/subscriptionStatus");
-    console.log(data);
+    // console.log(data);
     return data.status;
 };
 
 export const fetchDueDate = async () => {
     const { data } = await axios.get("/subscriptionStatus");
-    console.log(data);
+    // console.log(data);
     return data.data;
 };

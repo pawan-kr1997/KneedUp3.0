@@ -1,8 +1,7 @@
-import { useContext, useState, createContext } from "react";
+import { useContext, createContext } from "react";
 import { useQuery } from "react-query";
 import { fetchCategoryList } from "../Functions/axiosFunctions";
-import { useGetApi } from "../Hooks/useGetApi";
-import { CategoryListContextType, CategoryListProps, ChildrenProps } from "../TscTypes/TscTypes";
+import { CategoryListContextType, ChildrenProps } from "../TscTypes/TscTypes";
 
 const CategoryList = createContext<CategoryListContextType | null>(null);
 
@@ -16,8 +15,6 @@ export const useCategoryList = () => {
 };
 
 export const CategoryListProvider: React.FC<ChildrenProps> = (props) => {
-    // const [list, loading, setList] = useGetApi("/feeds/category");
-
     const fallback = {};
     const { data: list = fallback } = useQuery("categoryList", fetchCategoryList);
 

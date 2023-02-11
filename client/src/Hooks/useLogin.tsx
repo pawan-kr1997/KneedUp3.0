@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/Auth";
 
-export const useLogin = () => {
+export const useLogin = (setError: React.Dispatch<React.SetStateAction<string>>) => {
     const { setIsLogged } = useAuth();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
@@ -23,10 +23,12 @@ export const useLogin = () => {
         onError: (error) => {
             console.log(error);
             if (axios.isAxiosError(error)) {
-                // setError(error.response?.data);
+                setError(error.response?.data);
             } else {
                 navigate("/somethingWentWrong");
             }
         },
     });
+
+    return handleLogin;
 };

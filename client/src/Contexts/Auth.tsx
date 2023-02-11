@@ -1,5 +1,4 @@
-import { useState, createContext, useContext, useEffect } from "react";
-import { useGetApi } from "../Hooks/useGetApi";
+import { useState, createContext, useContext } from "react";
 import { AuthContextType } from "../TscTypes/ContextTypes";
 import { ChildrenProps } from "../TscTypes/TscTypes";
 

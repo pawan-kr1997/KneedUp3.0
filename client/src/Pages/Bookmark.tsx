@@ -3,29 +3,14 @@ import BookmarkCardSkeleton from "../ComponentsNew/Bookmark/BookmarkCardSkeleton
 import NavBar from "../ComponentsNew/NavBar";
 import { BookmarkContainer } from "../Styles/bookmark.styles";
 import { BookmarkData } from "../TscTypes/TscTypes";
-import { useIsFetching, useQuery, useMutation, useQueryClient } from "react-query";
-import { deleteBookmark, fetchBookmarks } from "../Functions/axiosFunctions";
+import { useIsFetching } from "react-query";
+import { useBookmark } from "../Hooks/useBookmark";
 
 const Bookmark = () => {
-    const queryClient = useQueryClient();
-    const bookmarkFallback: BookmarkData[] = [];
-    const { data: bookmarks = bookmarkFallback } = useQuery("bookmark", fetchBookmarks, {
-        onError: (error) => {
-            console.log(error);
-        },
-    });
     const isFetching = useIsFetching();
+    const { bookmarks, handleDelete } = useBookmark();
 
-    const { mutate: handleDelete } = useMutation((postId: string) => deleteBookmark(postId), {
-        onSuccess: (data) => {
-            queryClient.invalidateQueries("bookmark");
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-
-    let cardArr = bookmarks.map((el: BookmarkData) => {
+    let cardArr = [...bookmarks].reverse().map((el: BookmarkData) => {
         return <BookmarkCard key={el.id} post={el} onDelete={handleDelete} />;
     });
 

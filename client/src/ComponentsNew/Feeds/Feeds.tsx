@@ -9,46 +9,19 @@ import FeedsHeader from "./FeedsHeader";
 import { useQuery, useMutation, useIsFetching } from "react-query";
 import { addBookmark, deleteBookmark, fetchBookmarks } from "../../Functions/axiosFunctions";
 import { useQueryClient } from "react-query";
+import { useBookmark } from "../../Hooks/useBookmark";
 
 const Feeds = () => {
     const queryClient = useQueryClient();
     const isFetching = useIsFetching(["feeds"]);
-    const bookmarkFallback: BookmarkData[] = [];
-    const { data: bookmarks = bookmarkFallback } = useQuery("bookmark", fetchBookmarks, {
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-
+    const { bookmarks, handleBookmark, handleUnmark } = useBookmark();
     const [posts, headerText] = useFeeds();
 
     let oldPostDate = "";
     let showDate = true;
     let cardArray = null;
 
-    const { mutate: handleBookmark } = useMutation((postId: string) => addBookmark(postId), {
-        onSuccess: (data) => {
-            console.log("bookmark added");
-            queryClient.invalidateQueries("bookmark");
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-
-    const { mutate: handleUnmark } = useMutation((postId: string) => deleteBookmark(postId), {
-        onSuccess: (data) => {
-            console.log("bookmark deleted");
-            queryClient.invalidateQueries("bookmark");
-        },
-        onError: (error) => {
-            console.log(error);
-        },
-    });
-
-    const finalPosts = [...posts].reverse();
-
-    cardArray = finalPosts.map((el) => {
+    cardArray = [...posts].reverse().map((el) => {
         const currentPostDate = getPostDateWithShortMonth(el.createdAt);
         if (oldPostDate !== currentPostDate) {
             showDate = true;

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Typography, Button, Checkbox } from "@mui/material";
-import { ChecklistButton, ChecklistContainer, ChecklistItem, ChecklistTitle } from "../../Styles/checklist.styles";
-import { CategoryListProps, ChecklistProps } from "../../TscTypes/TscTypes";
+import { ChecklistContainer, ChecklistItem, ChecklistTitle } from "../../Styles/checklist.styles";
+import { ChecklistProps } from "../../TscTypes/TscTypes";
 import { useCategoryList } from "../../Contexts/CategoryList";
-import axios from "axios";
-import { useIsFetching, useQueryClient, useMutation } from "react-query";
-import { updateCategory } from "../../Functions/axiosFunctions";
+import { useIsFetching } from "react-query";
+import { useUser } from "../../Hooks/useUser";
 
 const Checklist: React.FC<ChecklistProps> = ({ isOpen, onIsOpen }) => {
     const [news, setNews] = useState(true);
@@ -13,8 +12,8 @@ const Checklist: React.FC<ChecklistProps> = ({ isOpen, onIsOpen }) => {
     const [pib, setPib] = useState(true);
     const [prs, setPrs] = useState(true);
     const isFetching = useIsFetching(["categoryList"]);
-    const queryClient = useQueryClient();
     const { list } = useCategoryList();
+    const { updateCategoryList } = useUser(onIsOpen);
 
     useEffect(() => {
         if (list) {
@@ -24,34 +23,6 @@ const Checklist: React.FC<ChecklistProps> = ({ isOpen, onIsOpen }) => {
             setPrs(list.prs);
         }
     }, [list, isOpen]);
-
-    const { mutate: updateCategoryList } = useMutation(({ news, president, pib, prs }: CategoryListProps) => updateCategory({ news, president, pib, prs }), {
-        onSuccess: (data) => {
-            // console.log(data);
-            queryClient.invalidateQueries(["categoryList"]);
-            onIsOpen(false);
-        },
-        onError: (err) => {
-            console.log(err);
-        },
-    });
-
-    // const updateCategory = async () => {
-    //     try {
-    //         const response = await axios.post("/feeds/category", {
-    //             News: news,
-    //             President: president,
-    //             Pib: pib,
-    //             Prs: prs,
-    //         });
-
-    //         console.log(response.data.data);
-    //         setList(response.data.data);
-    //         onIsOpen(false);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // };
 
     return (
         <Modal open={isOpen} onClose={() => onIsOpen(false)}>

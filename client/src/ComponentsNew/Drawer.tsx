@@ -25,8 +25,6 @@ const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
     const isFetching = useIsFetching(["categoryList"]);
     const { list } = useCategoryList();
 
-    // console.log(`list: ${list} anf loading: ${loading}`);
-
     return (
         <MuiDrawer anchor="left" open={isDrawerOpen} onClose={() => onIsDrawerOpen(false)}>
             <MuiBox p={1} width="280px">
