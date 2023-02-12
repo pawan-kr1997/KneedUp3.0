@@ -20,6 +20,8 @@ import Accordion from "./Accordion";
 import { DrawerProps } from "../TscTypes/TscTypes";
 import AuthButtonGrp from "./Buttons/AuthButtonGrp";
 import { useIsFetching } from "react-query";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../ErrorBoundary/ErrorFallback";
 
 const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
     const isFetching = useIsFetching(["categoryList"]);
@@ -49,6 +51,7 @@ const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
                         Subscription
                     </ListItem>
                 </List>
+                {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
                 <MuiBox>
                     {isFetching ? null : (
                         <>
@@ -88,6 +91,7 @@ const Drawer: React.FC<DrawerProps> = ({ isDrawerOpen, onIsDrawerOpen }) => {
                         </>
                     )}
                 </MuiBox>
+                {/* </ErrorBoundary> */}
                 <MuiBox mt={2}>
                     <AuthButtonGrp />
                 </MuiBox>

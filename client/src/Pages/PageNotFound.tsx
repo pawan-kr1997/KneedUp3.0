@@ -14,7 +14,7 @@ const PageNotFound = () => {
                     Page Not Found
                 </MuiTypography>
                 <MuiTypography>Invalid route. Please go back to home</MuiTypography>
-                <MuiButton variant="contained" onClick={() => navigate("/")}>
+                <MuiButton variant="contained" onClick={() => navigate("/newsOnAir_National")}>
                     Back to home
                 </MuiButton>
             </ExceptionContainer>

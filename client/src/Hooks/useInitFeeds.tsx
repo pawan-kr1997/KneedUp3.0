@@ -12,7 +12,6 @@ export const useInitFeeds = () => {
     useEffect(() => {
         if (list) {
             handleInitNavigation(navigate, list);
-            console.log(`hello ${JSON.stringify(list)}`);
         }
     }, [JSON.stringify(list), isLogged]);
 };

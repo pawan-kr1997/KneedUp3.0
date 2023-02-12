@@ -37,7 +37,7 @@ export default function Subscription() {
 
     return (
         <>
-            <NavBar variant="primary" />
+            <NavBar variant="secondary" />
             <SubsContainer>{subscriptionPageContent}</SubsContainer>
         </>
     );

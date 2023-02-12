@@ -66,9 +66,9 @@ const App = () => {
             <Route
                 path="/somethingWentWrong"
                 element={
-                    <CategoryListProvider>
+                    <HomeProvider>
                         <SomethingWentWrong />
-                    </CategoryListProvider>
+                    </HomeProvider>
                 }
             ></Route>
             <Route

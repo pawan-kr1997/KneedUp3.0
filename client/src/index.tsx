@@ -11,6 +11,9 @@ import { theme } from "./Styles/theme.styles";
 import { ThemeProvider } from "@mui/material";
 import { AuthProvider } from "./Contexts/Auth";
 import { queryClient } from "./React-Query/QueryClient";
+import ErrorFallback from "./ErrorBoundary/ErrorFallback";
+import { ErrorBoundary } from "react-error-boundary";
+import { ChakraProvider } from "@chakra-ui/react";
 
 axios.defaults.baseURL = "http://localhost:8090";
 axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
@@ -30,9 +33,13 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <QueryClientProvider client={queryClient}>
-                <ThemeProvider theme={theme}>
-                    <App />
-                </ThemeProvider>
+                {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
+                <ChakraProvider>
+                    <ThemeProvider theme={theme}>
+                        <App />
+                    </ThemeProvider>
+                </ChakraProvider>
+                {/* </ErrorBoundary> */}
                 <ReactQueryDevtools />
             </QueryClientProvider>
         </BrowserRouter>

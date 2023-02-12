@@ -6,6 +6,8 @@ import ListContainer from "../List/ListContainer";
 import ListItem from "../List/ListItem";
 import CategoryBarSkeleton from "./CategoryBarSkeleton";
 import { useIsFetching } from "react-query";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../../ErrorBoundary/ErrorFallback";
 
 const CategoryBar = () => {
     const { list } = useCategoryList();
@@ -14,6 +16,7 @@ const CategoryBar = () => {
     return (
         <CategoryContainer>
             <AuthButtonGrp />
+            {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
             <CategoryListContainer>
                 {isFetching ? (
                     <CategoryBarSkeleton />
@@ -67,6 +70,7 @@ const CategoryBar = () => {
                     </>
                 )}
             </CategoryListContainer>
+            {/* </ErrorBoundary> */}
         </CategoryContainer>
     );
 };

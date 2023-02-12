@@ -27,7 +27,7 @@ export const FeedsHeaderContent = styled(MuiBox)(({ theme }) => ({
 
 export const DateContainer = styled(MuiBox)({
     fontSize: ".7rem",
-    width: "5rem",
+    width: "6rem",
     height: "fit-content",
     padding: ".5rem 1rem",
     backgroundColor: "hsl(0, 0%, 90%)",

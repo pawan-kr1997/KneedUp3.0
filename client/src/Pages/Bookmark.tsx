@@ -5,6 +5,7 @@ import { BookmarkContainer } from "../Styles/bookmark.styles";
 import { BookmarkData } from "../TscTypes/TscTypes";
 import { useIsFetching } from "react-query";
 import { useBookmark } from "../Hooks/useBookmark";
+import { useState } from "react";
 
 const Bookmark = () => {
     const isFetching = useIsFetching();

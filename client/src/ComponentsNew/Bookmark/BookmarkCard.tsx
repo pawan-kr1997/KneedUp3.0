@@ -2,7 +2,6 @@ import React from "react";
 import { Card, CardContent, CardDate, CardHeader, CardSource } from "../../Styles/card.styles";
 import { Stack, IconButton } from "@mui/material";
 
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShareIcon from "@mui/icons-material/Share";
 import { BookmarkProps } from "../../TscTypes/TscTypes";

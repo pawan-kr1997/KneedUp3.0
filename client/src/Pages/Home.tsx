@@ -5,8 +5,10 @@ import Checklist from "../ComponentsNew/Checklist/Checklist";
 import Feeds from "../ComponentsNew/Feeds/Feeds";
 import NavBar from "../ComponentsNew/NavBar";
 import Sidebar from "../ComponentsNew/Sidebar/Sidebar";
+import ErrorFallback from "../ErrorBoundary/ErrorFallback";
 import { useInitFeeds } from "../Hooks/useInitFeeds";
 import { ContentSection } from "../Styles/home.styles";
+import { ErrorBoundary } from "react-error-boundary";
 
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,8 +20,10 @@ const Home = () => {
             <Checklist isOpen={isOpen} onIsOpen={setIsOpen} />
             <ContentSection>
                 <Sidebar onIsOpen={setIsOpen} />
+                {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
                 <Outlet />
                 <CategorySidebar />
+                {/* </ErrorBoundary> */}
             </ContentSection>
         </>
     );

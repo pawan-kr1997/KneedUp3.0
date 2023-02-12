@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { UseMutateFunction } from "react-query/types/react";
+import { handleDeleteParams } from "./Functions";
 
 export type LogoProps = {
     variant: string;

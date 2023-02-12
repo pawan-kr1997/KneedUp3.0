@@ -1,3 +1,5 @@
+import type { CreateStandaloneToastReturn } from "@chakra-ui/toast";
+
 export type GetFeedUrlAndHeaderReturnType = {
     url: string;
     headerText: string;
@@ -29,4 +31,9 @@ export type signupUserParams = {
 
 export type fetchFeedsParams = {
     url: string;
+};
+
+export type handleDeleteParams = {
+    postId: string;
+    toast: CreateStandaloneToastReturn;
 };

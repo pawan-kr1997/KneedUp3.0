@@ -16,7 +16,9 @@ export const useCategoryList = () => {
 
 export const CategoryListProvider: React.FC<ChildrenProps> = (props) => {
     const fallback = {};
-    const { data: list = fallback } = useQuery("categoryList", fetchCategoryList);
+    const { data: list = fallback } = useQuery("categoryList", fetchCategoryList, {
+        useErrorBoundary: true,
+    });
 
     const value = { list } as CategoryListContextType;
 
