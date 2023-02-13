@@ -5,11 +5,16 @@ import { useToast } from "@chakra-ui/react";
 import { handleUserDataError } from "../Functions/errorFunction";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Contexts/Auth";
+import { useSubscription } from "../Contexts/Subscription";
+import { Navigate } from "react-router-dom";
 
 export const useBookmark = () => {
     const queryClient = useQueryClient();
     const toast = useToast();
     const navigate = useNavigate();
+    const { isLogged } = useAuth();
+    const { subscriptionStatus } = useSubscription();
 
     const bookmarkFallback: BookmarkData[] = [];
     const { data: bookmarks = bookmarkFallback } = useQuery("bookmark", fetchBookmarks, {
@@ -41,7 +46,7 @@ export const useBookmark = () => {
         },
     });
 
-    const { mutate: handleBookmark } = useMutation((postId: string) => addBookmark(postId), {
+    const { mutate } = useMutation((postId: string) => addBookmark(postId), {
         onSuccess: (data) => {
             console.log("bookmark added");
             toast({ title: "Bookmark added", status: "success", duration: 3000, isClosable: true });
@@ -56,6 +61,16 @@ export const useBookmark = () => {
             }
         },
     });
+
+    const handleBookmark = (postId: string) => {
+        if (!isLogged) {
+            return navigate("/login");
+        }
+        if (!subscriptionStatus) {
+            return navigate("/subscription");
+        }
+        mutate(postId);
+    };
 
     const { mutate: handleUnmark } = useMutation((postId: string) => deleteBookmark(postId), {
         onSuccess: (data) => {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 import CategorySidebar from "../ComponentsNew/CategoryBar/CategoryBar";
 import Checklist from "../ComponentsNew/Checklist/Checklist";
 import Feeds from "../ComponentsNew/Feeds/Feeds";
@@ -21,7 +22,9 @@ const Home = () => {
             <ContentSection>
                 <Sidebar onIsOpen={setIsOpen} />
                 {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
-                <Outlet />
+                <Box sx={{ width: "min(50rem, 100vw)" }}>
+                    <Outlet />
+                </Box>
                 <CategorySidebar />
                 {/* </ErrorBoundary> */}
             </ContentSection>
