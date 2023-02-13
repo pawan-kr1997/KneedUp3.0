@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
+import path from "path";
 import Stripe from "stripe";
 import * as dotenv from "dotenv";
 
@@ -26,6 +27,10 @@ app.use(cors());
 app.use(postRoutes);
 app.use(userRoutes);
 app.use(subscriptionRoutes);
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/client/build")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "/client/build/index.html")));
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
     res.status(500).json("" + error);
