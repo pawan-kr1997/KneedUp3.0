@@ -6,6 +6,7 @@ import App from "./App";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 import { theme } from "./Styles/theme.styles";
 import { ThemeProvider } from "@mui/material";
@@ -16,7 +17,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ChakraProvider } from "@chakra-ui/react";
 
 // axios.defaults.baseURL = "http://localhost:8090";
-axios.defaults.baseURL = "https://kneedup3-0.onrender.com";
+axios.defaults.baseURL = "https://kneedup3-0.onrender.com ";
 axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 axios.interceptors.request.use(
@@ -32,7 +33,7 @@ axios.interceptors.request.use(
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter>
             <QueryClientProvider client={queryClient}>
                 {/* <ErrorBoundary FallbackComponent={ErrorFallback}> */}
                 <ChakraProvider>
@@ -43,6 +44,6 @@ root.render(
                 {/* </ErrorBoundary> */}
                 <ReactQueryDevtools />
             </QueryClientProvider>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>
 );
