@@ -36,4 +36,5 @@ app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
     res.status(500).json("" + error);
 });
 
-app.listen(8090, () => console.log("listening for port 8090"));
+const port = process.env.PORT || 8090;
+app.listen(port, () => console.log("listening for port 8090"));

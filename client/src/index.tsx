@@ -17,7 +17,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ChakraProvider } from "@chakra-ui/react";
 
 // axios.defaults.baseURL = "http://localhost:8090";
-axios.defaults.baseURL = "https://kneedup3-0.onrender.com ";
+axios.defaults.baseURL = "https://kneedup3-01.onrender.com ";
 axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 
 axios.interceptors.request.use(
