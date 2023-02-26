@@ -74,7 +74,8 @@ const addPostToUserBookmarks = (req, res, next) => __awaiter(void 0, void 0, voi
         const post = yield (0, databaseFunctions_1.getPostWithSourcesField)(postId);
         const postCategory = (0, controllerFunctions_1.setPostCategory)(post.sources.name, post.category);
         const updatedBookmark = (0, controllerFunctions_1.addDataToBookmark)(post, user, postId, postCategory);
-        const updatedUser = yield (0, databaseFunctions_1.updateUserBookmark)(req.userId, updatedBookmark);
+        const updatedBmark = (0, controllerFunctions_1.addDataToBmark)(post, user, postId, postCategory);
+        const updatedUser = yield (0, databaseFunctions_1.updateUserBookmark)(req.userId, updatedBookmark, updatedBmark);
         res.status(200).json({ message: "Result after adding bookmark", user: updatedUser });
     }
     catch (err) {
@@ -88,7 +89,8 @@ const deletePostFromUserBookmarks = (req, res, next) => __awaiter(void 0, void 0
     try {
         const user = yield (0, databaseFunctions_1.getUserFromDbUsingId)(req.userId);
         const updatedBookmark = (0, controllerFunctions_1.deleteDataFromBookmark)(user, postId);
-        const updatedUser = yield (0, databaseFunctions_1.updateUserBookmark)(req.userId, updatedBookmark);
+        const updatedBmark = (0, controllerFunctions_1.deleteDataFromBmark)(user, postId);
+        const updatedUser = yield (0, databaseFunctions_1.updateUserBookmark)(req.userId, updatedBookmark, updatedBmark);
         res.status(200).json({ message: "Post unmarked", user: updatedUser });
     }
     catch (err) {
@@ -100,7 +102,7 @@ exports.deletePostFromUserBookmarks = deletePostFromUserBookmarks;
 const getUserBookmarks = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield (0, databaseFunctions_1.getUserFromDbUsingId)(req.userId);
-        res.status(200).json({ message: "init bookmark", bookmark: user.bookmark });
+        res.status(200).json({ message: "init bookmark", bookmark: user.bookmark, bmark: user.bmark });
     }
     catch (err) {
         console.log(err);

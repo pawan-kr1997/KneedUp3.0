@@ -11,6 +11,8 @@ import {
     checkIfUserExists,
     checkIfUserNotExists,
     generateAndMailLinkToUser,
+    addDataToBmark,
+    deleteDataFromBmark,
 } from "../Utils/controllerFunctions";
 import {
     createNewUser,
@@ -89,7 +91,8 @@ export const addPostToUserBookmarks = async (req: ExtendedRequest, res: Response
         const post = await getPostWithSourcesField(postId);
         const postCategory = setPostCategory(post.sources.name, post.category);
         const updatedBookmark = addDataToBookmark(post, user, postId, postCategory);
-        const updatedUser = await updateUserBookmark(req.userId, updatedBookmark);
+        const updatedBmark = addDataToBmark(post, user, postId, postCategory);
+        const updatedUser = await updateUserBookmark(req.userId, updatedBookmark, updatedBmark);
 
         res.status(200).json({ message: "Result after adding bookmark", user: updatedUser });
     } catch (err) {
@@ -104,7 +107,8 @@ export const deletePostFromUserBookmarks = async (req: ExtendedRequest, res: Res
     try {
         const user = await getUserFromDbUsingId(req.userId);
         const updatedBookmark = deleteDataFromBookmark(user, postId);
-        const updatedUser = await updateUserBookmark(req.userId, updatedBookmark);
+        const updatedBmark = deleteDataFromBmark(user, postId);
+        const updatedUser = await updateUserBookmark(req.userId, updatedBookmark, updatedBmark);
 
         res.status(200).json({ message: "Post unmarked", user: updatedUser });
     } catch (err) {
@@ -117,7 +121,7 @@ export const getUserBookmarks = async (req: ExtendedRequest, res: Response, next
     try {
         const user = await getUserFromDbUsingId(req.userId);
 
-        res.status(200).json({ message: "init bookmark", bookmark: user.bookmark });
+        res.status(200).json({ message: "init bookmark", bookmark: user.bookmark, bmark: user.bmark });
     } catch (err) {
         console.log(err);
         next(err);

@@ -57,6 +57,7 @@ export type User = {
     resetTokenExpiration: Number | undefined;
     category: Object;
     bookmark: BookmarkData[];
+    bmark: BmarkData;
 };
 
 export type SourceData = {
@@ -103,6 +104,10 @@ export type BookmarkData = {
     title: string;
     url: string;
     category: string;
+};
+
+export type BmarkData = {
+    [key: string]: BookmarkData;
 };
 
 export type StripeEventObject = Stripe.Event.Data.Object & {

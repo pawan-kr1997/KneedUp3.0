@@ -83,13 +83,14 @@ const setResetPasswordToUser = (emailId, password) => __awaiter(void 0, void 0, 
     return updatedUser;
 });
 exports.setResetPasswordToUser = setResetPasswordToUser;
-const updateUserBookmark = (userId, updatedBookmark) => __awaiter(void 0, void 0, void 0, function* () {
+const updateUserBookmark = (userId, updatedBookmark, updatedBmark) => __awaiter(void 0, void 0, void 0, function* () {
     const updatedUser = yield prisma.users.update({
         where: {
             id: userId,
         },
         data: {
             bookmark: updatedBookmark,
+            bmark: updatedBmark,
         },
     });
     return updatedUser;
@@ -109,6 +110,7 @@ const createNewUser = (emailId, password) => __awaiter(void 0, void 0, void 0, f
                 prs: true,
             },
             bookmark: [],
+            bmark: {},
             stripeUserId: null,
             subscriptionId: null,
             subscriptionStatus: false,

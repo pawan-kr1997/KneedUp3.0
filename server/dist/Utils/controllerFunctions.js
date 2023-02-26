@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateAndMailLinkToUser = exports.checkCryptoError = exports.deleteDataFromBookmark = exports.addDataToBookmark = exports.setPostCategory = exports.generateJwtToken = exports.checkIfUserNotExists = exports.checkIfUserExists = exports.checkForPasswordMatch = exports.checkForValidationError = void 0;
+exports.generateAndMailLinkToUser = exports.checkCryptoError = exports.deleteDataFromBmark = exports.deleteDataFromBookmark = exports.addDataToBmark = exports.addDataToBookmark = exports.setPostCategory = exports.generateJwtToken = exports.checkIfUserNotExists = exports.checkIfUserExists = exports.checkForPasswordMatch = exports.checkForValidationError = void 0;
 const express_validator_1 = require("express-validator");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const crypto_1 = __importDefault(require("crypto"));
@@ -103,12 +103,33 @@ const addDataToBookmark = (postData, userData, postId, postCategory) => {
     return updatedBookmark;
 };
 exports.addDataToBookmark = addDataToBookmark;
+const addDataToBmark = (postData, userData, postId, postCategory) => {
+    const postDate = postData.createdAt;
+    const postURL = postData.url;
+    const postTitle = postData.title;
+    let updatedBmark = Object.assign({}, userData.bmark);
+    updatedBmark[postId] = {
+        id: postId,
+        date: postDate,
+        title: postTitle,
+        url: postURL,
+        category: postCategory,
+    };
+    return updatedBmark;
+};
+exports.addDataToBmark = addDataToBmark;
 const deleteDataFromBookmark = (userData, postId) => {
     let oldBookmark = [...userData.bookmark];
     let updatedBookmark = oldBookmark.filter((el) => el.id !== postId);
     return updatedBookmark;
 };
 exports.deleteDataFromBookmark = deleteDataFromBookmark;
+const deleteDataFromBmark = (userData, postId) => {
+    let updatedBmark = Object.assign({}, userData.bmark);
+    delete updatedBmark[postId];
+    return updatedBmark;
+};
+exports.deleteDataFromBmark = deleteDataFromBmark;
 const checkCryptoError = (err) => {
     if (err) {
         const error = new Error("Password reset error");

@@ -76,6 +76,7 @@ model users {
   bookmark             UsersBookmark[]
   stripeUserId         String?         @unique
   subscriptionId       String?
+  bmark                Json?
   subscriptionStatus   Boolean
   resetToken           String?
   resetTokenExpiration Int?

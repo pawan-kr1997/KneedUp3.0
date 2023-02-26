@@ -3,7 +3,7 @@ import jwt, { Secret } from "jsonwebtoken";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 
-import { BookmarkData, ExtendedPost, ExtendedRequest, User } from "./tscTypes";
+import { BmarkData, BookmarkData, ExtendedPost, ExtendedRequest, User } from "./tscTypes";
 import { addResetTokenToUser, getUserFromDbUsingEmailId } from "./databaseFunctions";
 
 const sendgridTransport = require("nodemailer-sendgrid-transport");
@@ -100,11 +100,35 @@ export const addDataToBookmark = (postData: ExtendedPost, userData: User, postId
     return updatedBookmark;
 };
 
+export const addDataToBmark = (postData: ExtendedPost, userData: User, postId: string, postCategory: string): BmarkData => {
+    const postDate = postData.createdAt;
+    const postURL = postData.url;
+    const postTitle = postData.title;
+
+    let updatedBmark = { ...userData.bmark };
+    updatedBmark[postId] = {
+        id: postId,
+        date: postDate,
+        title: postTitle,
+        url: postURL,
+        category: postCategory,
+    };
+
+    return updatedBmark;
+};
+
 export const deleteDataFromBookmark = (userData: User, postId: string): BookmarkData[] => {
     let oldBookmark = [...userData.bookmark];
     let updatedBookmark = oldBookmark.filter((el) => el.id !== postId);
 
     return updatedBookmark;
+};
+
+export const deleteDataFromBmark = (userData: User, postId: string): BmarkData => {
+    let updatedBmark = { ...userData.bmark };
+    delete updatedBmark[postId];
+
+    return updatedBmark;
 };
 
 export const checkCryptoError = (err: Error | null) => {

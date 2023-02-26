@@ -1,6 +1,6 @@
 const prisma = require("../../prisma/index.js");
 
-import { Article, BookmarkData, ExtendedPost, ExtendedRequest, ExtendedRequestBody, Post, Source, User } from "./tscTypes";
+import { Article, BmarkData, BookmarkData, ExtendedPost, ExtendedRequest, ExtendedRequestBody, Post, Source, User } from "./tscTypes";
 import { checkIfUserNotExists } from "./controllerFunctions";
 
 export const getUserFromDbUsingEmailId = async (emailId: String | undefined): Promise<User> => {
@@ -81,13 +81,14 @@ export const setResetPasswordToUser = async (emailId: String, password: String):
     return updatedUser;
 };
 
-export const updateUserBookmark = async (userId: String | undefined, updatedBookmark: BookmarkData[]): Promise<User> => {
+export const updateUserBookmark = async (userId: String | undefined, updatedBookmark: BookmarkData[], updatedBmark: BmarkData): Promise<User> => {
     const updatedUser = await prisma.users.update({
         where: {
             id: userId,
         },
         data: {
             bookmark: updatedBookmark,
+            bmark: updatedBmark,
         },
     });
 
@@ -108,6 +109,7 @@ export const createNewUser = async (emailId: String | undefined, password: Strin
                 prs: true,
             },
             bookmark: [],
+            bmark: {},
             stripeUserId: null,
             subscriptionId: null,
             subscriptionStatus: false,
