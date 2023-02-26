@@ -19,6 +19,7 @@ export const useLogin = (setError: React.Dispatch<React.SetStateAction<string>>)
             axios.defaults.headers.common["Authorization"] = data.token;
             queryClient.invalidateQueries(["categoryList"]);
             queryClient.invalidateQueries(["subsStatus"]);
+            queryClient.refetchQueries("bmark");
             setIsLogged(true);
             toast({ title: "User logged", status: "success", duration: 3000, isClosable: true });
             navigate("/");

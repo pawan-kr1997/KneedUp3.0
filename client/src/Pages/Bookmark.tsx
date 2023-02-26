@@ -9,10 +9,10 @@ import { useState } from "react";
 
 const Bookmark = () => {
     const isFetching = useIsFetching();
-    const { bookmarks, handleDelete } = useBookmark();
+    const { bmarks, handleDelete } = useBookmark();
 
-    let cardArr = [...bookmarks].reverse().map((el: BookmarkData) => {
-        return <BookmarkCard key={el.id} post={el} onDelete={handleDelete} />;
+    let cardArr = [...Object.entries(bmarks)].reverse().map((el: [string, BookmarkData]) => {
+        return <BookmarkCard key={el[0]} post={el[1]} onDelete={handleDelete} />;
     });
 
     return (

@@ -41,7 +41,7 @@ export const LogoutBtn: React.FC<ButtonProps> = ({ variant }) => {
                 localStorage.removeItem("token");
                 axios.defaults.headers.common["Authorization"] = null;
                 queryClient.invalidateQueries(["categoryList"]);
-                queryClient.invalidateQueries("bookmark");
+                queryClient.invalidateQueries("bmark");
                 setIsLogged(false);
                 toast({ title: "User logged out", status: "success", duration: 3000, isClosable: true });
             }}

@@ -128,3 +128,7 @@ export type BookmarkData = {
     url: string;
     category: string;
 };
+
+export type BmarkData = {
+    [key: string]: BookmarkData;
+};

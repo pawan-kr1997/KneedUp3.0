@@ -1,6 +1,6 @@
 import axios from "axios";
 import { signupUserParams, loginUserParams, fetchFeedsParams } from "../TscTypes/Functions";
-import { CategoryListProps } from "../TscTypes/TscTypes";
+import { BmarkData, CategoryListProps } from "../TscTypes/TscTypes";
 
 export const loginUser = async ({ emailId, password }: loginUserParams) => {
     const { data } = await axios.post("/login", { emailId, password });
@@ -36,6 +36,12 @@ export const fetchBookmarks = async () => {
     const { data } = await axios.get("/bookmark");
     // console.log(data);
     return data.bookmark;
+};
+
+export const fetchBmarks = async (): Promise<BmarkData> => {
+    const { data } = await axios.get("/bookmark");
+    // console.log(data.bmark);
+    return data.bmark;
 };
 
 export const fetchFeeds = async (url: string) => {

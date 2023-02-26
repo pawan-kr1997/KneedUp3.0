@@ -13,7 +13,7 @@ const FeedsCard: React.FC<FeedsCardProps> = ({ post, onBookmark, onUnmark, isBoo
     const postUrl = configurePostUrl(params.category as string, post.url);
 
     return (
-        <Card>
+        <Card key={post.id}>
             <CardContent href={postUrl} target="_blank" rel="noopener noreferrer">
                 {post.title}
             </CardContent>

@@ -1,13 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { addBookmark, deleteBookmark, fetchBookmarks } from "../Functions/axiosFunctions";
-import { BookmarkData } from "../TscTypes/TscTypes";
+import { addBookmark, deleteBookmark, fetchBmarks, fetchBookmarks } from "../Functions/axiosFunctions";
+import { BmarkData, BookmarkData } from "../TscTypes/TscTypes";
 import { useToast } from "@chakra-ui/react";
 import { handleUserDataError } from "../Functions/errorFunction";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Contexts/Auth";
 import { useSubscription } from "../Contexts/Subscription";
-import { Navigate } from "react-router-dom";
 
 export const useBookmark = () => {
     const queryClient = useQueryClient();
@@ -16,8 +15,9 @@ export const useBookmark = () => {
     const { isLogged } = useAuth();
     const { subscriptionStatus } = useSubscription();
 
-    const bookmarkFallback: BookmarkData[] = [];
-    const { data: bookmarks = bookmarkFallback } = useQuery("bookmark", fetchBookmarks, {
+    const bmarkFallback: BmarkData = {};
+
+    const { data: bmarks = bmarkFallback } = useQuery("bmark", fetchBmarks, {
         onError: (error) => {
             console.log(error);
             toast({ title: "Something went wrong", status: "error", duration: 3000, isClosable: true });
@@ -33,7 +33,7 @@ export const useBookmark = () => {
         onSuccess: (data) => {
             console.log(data);
             toast({ title: "Bookmark deleted", status: "success", duration: 3000, isClosable: true });
-            queryClient.invalidateQueries("bookmark");
+            queryClient.invalidateQueries("bmark");
         },
         onError: (error) => {
             console.log(error);
@@ -50,7 +50,7 @@ export const useBookmark = () => {
         onSuccess: (data) => {
             console.log("bookmark added");
             toast({ title: "Bookmark added", status: "success", duration: 3000, isClosable: true });
-            queryClient.invalidateQueries("bookmark");
+            queryClient.invalidateQueries("bmark");
         },
         onError: (error) => {
             console.log(error);
@@ -76,7 +76,7 @@ export const useBookmark = () => {
         onSuccess: (data) => {
             console.log("bookmark deleted");
             toast({ title: "Bookmark deleted", status: "success", duration: 3000, isClosable: true });
-            queryClient.invalidateQueries("bookmark");
+            queryClient.invalidateQueries("bmark");
         },
         onError: (error) => {
             console.log(error);
@@ -89,5 +89,5 @@ export const useBookmark = () => {
         },
     });
 
-    return { bookmarks, handleDelete, handleBookmark, handleUnmark };
+    return { bmarks, handleDelete, handleBookmark, handleUnmark };
 };

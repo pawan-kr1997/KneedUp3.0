@@ -7,7 +7,7 @@ const FeedsCardSkeleton = () => {
 
     for (let i = 0; i < 15; i++) {
         skeletonCardArray.push(
-            <Card>
+            <Card key={i}>
                 <>
                     <Skeleton sx={{ width: "100%" }} />
                     <Skeleton sx={{ width: "80%" }} />

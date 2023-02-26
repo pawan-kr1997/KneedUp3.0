@@ -12,9 +12,8 @@ import { useQueryClient } from "react-query";
 import { useBookmark } from "../../Hooks/useBookmark";
 
 const Feeds = () => {
-    const queryClient = useQueryClient();
     const isFetching = useIsFetching(["feeds"]);
-    const { bookmarks, handleBookmark, handleUnmark } = useBookmark();
+    const { bmarks, handleBookmark, handleUnmark } = useBookmark();
     const [posts, headerText] = useFeeds();
 
     let oldPostDate = "";
@@ -30,14 +29,7 @@ const Feeds = () => {
             showDate = false;
         }
 
-        let isBookmark = false;
-        if (bookmarks.length) {
-            for (let i = 0; i < bookmarks.length; i++) {
-                if (bookmarks[i].id === el.id) {
-                    isBookmark = true;
-                }
-            }
-        }
+        let isBookmark = bmarks[el.id] ? true : false;
 
         return (
             <>
