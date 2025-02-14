@@ -1,9 +1,13 @@
-import { Request } from "express";
-import Stripe from "stripe";
+import { Request } from 'express';
+import Stripe from 'stripe';
+
+export interface ScrapperStrategyType {
+    scrap: any;
+}
 
 export type Article = {
-    title: string;
-    url: string;
+    title: string | undefined;
+    url: string | undefined;
 };
 
 export type ExtendedRequestBody = {
