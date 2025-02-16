@@ -7,48 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-type SourcesData {
-  articles      SourcesDataState
-  blogs         SourcesDataState
-  business      SourcesDataState
-  international SourcesDataState
-  national      SourcesDataState
-  sports        SourcesDataState
-  pressReleases SourcesDataState
-  speeches      SourcesDataState
-}
-
-type SourcesDataState {
-  currentState StateData[]
-  oldState     StateData[]
-}
-
-type StateData {
-  title String
-  url   String
-}
-
-model sources {
-  id           String      @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt    DateTime    @default(now())
-  currentState StateData[]
-  data         SourcesData
-  name         String      @unique
-  oldState     StateData[]
-  updatedAt    DateTime    @updatedAt
-  url          String
-  posts        posts[]
-}
-
 model posts {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   url       String
   title     String
   category  String
-  source    String   @db.ObjectId
-  sources   sources  @relation(fields: [source], references: [id])
+  sub_category  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 type UsersCategory {
@@ -60,24 +26,17 @@ type UsersCategory {
   prs       Boolean
 }
 
-type UsersBookmark {
-  id       String
-  date     DateTime
-  title    String
-  url      String
-  category String
-}
-
 model users {
   id                   String          @id @default(auto()) @map("_id") @db.ObjectId
   emailId              String          @unique
   password             String
   category             UsersCategory
-  bookmark             UsersBookmark[]
+  bookmark             String[]
   stripeUserId         String?         @unique
   subscriptionId       String?
-  bmark                Json?
   subscriptionStatus   Boolean
   resetToken           String?
   resetTokenExpiration Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
